@@ -40,20 +40,6 @@ module.exports = env => {
       new CompressionPlugin({
         test: /\.(html|css|js)(\?.*)?$/i
       }),
-      new ImageminPlugin({
-        test: "./dist/images/**",
-        gifsicle: {
-          optimizationLevel: 9
-        },
-        pngquant: {
-          quality: "75"
-        },
-        plugins: [
-          imageminMozjpeg({
-            quality: "75"
-          })
-        ]
-      }),
       new FaviconsWebpackPlugin({
         logo: "./client/static/favicon.svg",
         icons: {
@@ -135,6 +121,55 @@ module.exports = env => {
             }
           ]
         },
+        isDevMode
+          ? {
+              test: /\.(jpe?g|png|gif|svg)$/,
+              use: [
+                {
+                  loader: "file-loader",
+                  options: {
+                    name: "[name].[ext]",
+                    outputPath: "images/",
+                    publicPath: "images/"
+                  }
+                }
+              ]
+            }
+          : {
+              test: /\.(jpe?g|png|gif|svg)$/,
+              use: [
+                {
+                  loader: "file-loader",
+                  options: {
+                    name: "[name].[ext]",
+                    outputPath: "images/",
+                    publicPath: "images/"
+                  }
+                },
+                {
+                  loader: "image-webpack-loader",
+                  options: {
+                    mozjpeg: {
+                      progressive: true,
+                      quality: 65
+                    },
+                    optipng: {
+                      enabled: false
+                    },
+                    pngquant: {
+                      quality: "65-90",
+                      speed: 4
+                    },
+                    gifsicle: {
+                      interlaced: false
+                    },
+                    webp: {
+                      quality: 75
+                    }
+                  }
+                }
+              ]
+            },
         {
           test: /\.(woff|woff2|ttf|otf)$/,
           use: [

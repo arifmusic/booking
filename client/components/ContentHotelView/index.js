@@ -2,12 +2,14 @@ import React from "react";
 
 import styles from "./contentHotelView.module.scss";
 
+import ViewGalery from "../ContentHotelViewGalery";
+
 const HotelView = () => {
-	return(
+	return (
 		<main className={styles.hotel_view}>
-		Hotel View
+			<ViewGalery />
 		</main>
 	);
-}
+};
 
 export default HotelView;
