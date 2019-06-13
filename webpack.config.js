@@ -40,6 +40,20 @@ module.exports = env => {
       new CompressionPlugin({
         test: /\.(html|css|js)(\?.*)?$/i
       }),
+      new ImageminPlugin({
+        test: "./dist/images/**",
+        gifsicle: {
+          optimizationLevel: 9
+        },
+        pngquant: {
+          quality: "75"
+        },
+        plugins: [
+          imageminMozjpeg({
+            quality: "75"
+          })
+        ]
+      }),
       new FaviconsWebpackPlugin({
         logo: "./client/static/favicon.svg",
         icons: {
@@ -105,19 +119,6 @@ module.exports = env => {
             {
               loader: "sass-loader",
               options: { sourceMap: true }
-            }
-          ]
-        },
-        {
-          test: /\.(jpe?g|png|gif|svg)$/,
-          use: [
-            {
-              loader: "file-loader",
-              options: {
-                name: "[name].[ext]",
-                outputPath: "images/",
-                publicPath: "images/"
-              }
             }
           ]
         },
