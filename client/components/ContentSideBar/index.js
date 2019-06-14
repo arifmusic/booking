@@ -32,7 +32,7 @@ const SideBar = () => {
 					</a>
 				</li>
 			</ul>
-			<div className={styles.legal}>&copy; 2017 by trillo. All rights reserved.</div>
+			<div className={styles.legal}>&copy; 2019 by trillo. All rights reserved.</div>
 		</nav>
 	);
 };
