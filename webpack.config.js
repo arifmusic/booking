@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require("terser-webpack-plugin");
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
 const imageminMozjpeg = require("imagemin-mozjpeg");
@@ -194,6 +195,7 @@ module.exports = env => {
           removeScriptTypeAttributes: true
         }
       }),
+      new CopyWebpackPlugin([{ from: "./client/static/favicon.ico" }]),
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: "defer"
       }),
