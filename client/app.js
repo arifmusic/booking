@@ -1,18 +1,26 @@
-require("offline-plugin/runtime").install();
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import "normalize.css/normalize.css";
 import "./static/styles/main.scss";
 
 import Header from "./components/Header";
-import Content from "./components/Content";
+import Home from "./container/Home";
+import Register from "./container/auth/Register";
 
 const App = () => {
 	return (
-		<div className="container">
-			<Header />
-			<Content />
-		</div>
+		<Router>
+			<React.Fragment>
+				<div className="container">
+					<Header />
+					<Switch>
+						<Route path="/register" component={Register} />
+						<Route path="/" component={Home} />
+					</Switch>
+				</div>
+			</React.Fragment>
+		</Router>
 	);
 };
 

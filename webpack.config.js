@@ -5,12 +5,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
-const PreloadWebpackPlugin = require("preload-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const ImageminPlugin = require("imagemin-webpack-plugin").default;
 const imageminMozjpeg = require("imagemin-mozjpeg");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
-const OfflinePlugin = require("offline-plugin");
 
 module.exports = env => {
   if (!env || !env.MODE) {
@@ -60,8 +58,7 @@ module.exports = env => {
           twitter: true,
           windows: true
         }
-      }),
-      new OfflinePlugin()
+      })
     ]
   };
   const optimization = isDevMode ? optimization_dev : optimization_prod;
@@ -196,14 +193,6 @@ module.exports = env => {
         minify: {
           removeScriptTypeAttributes: true
         }
-      }),
-      new PreloadWebpackPlugin({
-        rel: "preload",
-        as(entry) {
-          if (/\.(woff|woff2|ttf|otf)$/.test(entry)) return "font";
-        },
-        fileWhitelist: [/\.(woff|woff2|ttf|otf)$/],
-        include: "allAssets"
       }),
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: "defer"
