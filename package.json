@@ -14,7 +14,7 @@
 		"yarn": "1.16.0"
 	},
 	"scripts": {
-		"start": "cross-env NODE_ENV=production node server/index.js",
+		"start": "node server/index.js",
 		"\n# ===================== DEV SCRIPTS: ========================": "",
 		"build:dev": "webpack --env.MODE=dev --config webpack.config.js --progress",
 		"dev-client": "shx rm -rf dist && yarn build:dev --watch",
